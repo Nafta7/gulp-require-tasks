@@ -6,7 +6,7 @@ var parentFile = parent.filename;
 var parentDir = Path.dirname(parentFile);
 
 module.exports = {
-  loadTasks: function(dir, gulp, path){
+  loadTasks: function(dir, opts){
     var obj_types = {};
 
     dir = dir || '.';
@@ -19,7 +19,7 @@ module.exports = {
       tasks.forEach(function(file){
         task = file.replace('.js', '');
         obj_types[type].push(task);
-        gulp.task(task, require(dir + "/" + type + '/' + task)(gulp, path));
+        gulp.task(task, require(dir + "/" + type + '/' + task)(opts));
       });
     });
 
