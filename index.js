@@ -20,7 +20,7 @@ module.exports = {
       tasks.forEach(function(file){
         task = file.replace('.js', '');
         obj_types[type].push(task);
-        gulp.task(task, require(dir + "/" + type + '/' + task)(opts.gulp,
+        opts.gulp.task(task, require(dir + "/" + type + '/' + task)(opts.gulp,
                                                                opts.path,
                                                                opts.plugins
                                                                ));
