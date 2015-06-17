@@ -1,13 +1,10 @@
-gulp-require-tasks
+#gulp-require-tasks
 ===================
 
+A module to automatically start gulp tasks by a given directory. To start the tasks you will need to provide a directory name where the tasks are stored. You you also need to provide a hash with gulp and a path (as an object). See Usage section for examples. 
 
-A module to require and load gulp tasks with parameters.
+##Usage
 
-----------
-
-Usage
--------------
 ```es6
 let path = {
   styles: {
