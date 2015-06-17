@@ -39,7 +39,7 @@ gulp_tasks/
     minify:js.js
 ```
 
-`req.loadTasks('gulp_tasks', opts)` will return the equivalent of:
+`var tasks = req.loadTasks('gulp_tasks', opts)` will return the equivalent of:
 
 ```js
 {
@@ -47,7 +47,7 @@ gulp_tasks/
   deploy: ['minify:css', 'minify:js']
 }
 ```
-Now with can automatically load our tasks into gulp following their directory structure.
+Now we can automatically load our tasks into gulp following their directory structure.
 ```js
 req.startTasks(gulp, tasks)
 ```
