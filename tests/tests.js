@@ -46,5 +46,12 @@ exports.multiple = {
     test.ok(gulp.tasks.d.fn.toString() == this.fn_d().toString(), "gulp failed to create task d.");
     test.ok(gulp.tasks.e.fn.toString() == this.fn_e().toString(), "gulp failed to create task e.");
     test.done()
+  },
+
+  testStartTasks: function(test){
+    toska.startTasks(gulp, this.tasks);
+    test.deepEqual(gulp.tasks['build'].dep, ['a', 'b', 'c'], "gulp failed to load build task dependencies.");
+    test.deepEqual(gulp.tasks['deploy'].dep, ['d', 'e'], 'gulp failed to load deploy task dependencies.')
+    test.done();
   }
 };

@@ -30,13 +30,11 @@ module.exports = {
   },
 
   startTasks: function(gulp, tasks){
-    Object.keys(tasks).forEach(function(type){
-      gulp.task(type, function(){
-        tasks[type].forEach(function(task){
-          gulp.start(task);
-        });
+    if(tasks !== null && typeof tasks === "object") {
+      Object.keys(tasks).forEach(function(type){
+        gulp.task(type, tasks[type]);
       });
-    });
+    }
   }
 };
 
