@@ -1,7 +1,14 @@
 #toska
-A module to automatically start gulp tasks by a given directory. To start the tasks you will need to provide a directory name where the tasks are stored. You you also need to provide a hash with gulp and a path (as a map). See Usage section for examples.
+A module to automatically start gulp tasks by a given directory. To start the tasks you will need to provide a directory name where the tasks are stored and a hash with gulp and a path (as a map). See usage section for examples.
 
 ##usage
+
+```
+import toska from 'toska';
+toska.mirror('gulp_tasks', {gulp: gulp, path: path, plugins: plugins});
+```
+
+##examples
 
 ```es6
 let path = {
@@ -24,9 +31,8 @@ let opts = {
   plugins: {browserSync: browserSync}
 };
 
-let tasks = toska.loadTasks('gulp_tasks', opts);
+let tasks = toska.mirror('gulp_tasks', opts);
 
-toska.startTasks(gulp, tasks);
 ```
 Given this directory structure:
 ```
@@ -39,7 +45,7 @@ gulp_tasks/
     minify:js.js
 ```
 
-`toska.loadTasks('gulp_tasks', opts)` will return the equivalent of:
+`toska.mirror('gulp_tasks', opts)` will return the equivalent of:
 
 ```js
 {
@@ -47,7 +53,14 @@ gulp_tasks/
   deploy: ['minify:css', 'minify:js']
 }
 ```
-Now we can automatically load our tasks into gulp following their directory structure.
-```js
-toska.startTasks(gulp, tasks)
+Toska will automatically load all tasks and their dependencies following
+the directory structure passed to `mirror`. So running `gulp -T` with the previous directory structure will result in the following tree:
+
+```
+build
+├──compile:sass.js
+├──compile:js.js
+deploy
+├──minify:css
+├──minify:js
 ```
