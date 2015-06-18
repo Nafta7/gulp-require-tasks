@@ -1,5 +1,5 @@
-#gulp-require-tasks
-A module to automatically start gulp tasks by a given directory. To start the tasks you will need to provide a directory name where the tasks are stored. You you also need to provide a hash with gulp and a path (as an object). See Usage section for examples. 
+#toska
+A module to automatically start gulp tasks by a given directory. To start the tasks you will need to provide a directory name where the tasks are stored. You you also need to provide a hash with gulp and a path (as a map). See Usage section for examples.
 
 ##Usage
 
@@ -16,7 +16,7 @@ let path = {
   }
 };
 
-import req from 'gulp-require-tasks';
+import toska from 'toska';
 
 let opts = {
   gulp: gulp,
@@ -24,9 +24,9 @@ let opts = {
   plugins: {browserSync: browserSync}
 };
 
-let tasks = req.loadTasks('gulp_tasks', opts);
+let tasks = toska.loadTasks('gulp_tasks', opts);
 
-req.startTasks(gulp, tasks);
+toska.startTasks(gulp, tasks);
 ```
 Given this directory structure:
 ```
@@ -39,7 +39,7 @@ gulp_tasks/
     minify:js.js
 ```
 
-`var tasks = req.loadTasks('gulp_tasks', opts)` will return the equivalent of:
+`toska.loadTasks('gulp_tasks', opts)` will return the equivalent of:
 
 ```js
 {
@@ -49,5 +49,5 @@ gulp_tasks/
 ```
 Now we can automatically load our tasks into gulp following their directory structure.
 ```js
-req.startTasks(gulp, tasks)
+toska.startTasks(gulp, tasks)
 ```

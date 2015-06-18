@@ -1,5 +1,5 @@
 {
-  "name": "gulp-require-tasks",
+  "name": "toska",
   "version": "0.0.2",
   "description": "A simple module to require gulp tasks",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nafta7/gulp-require-tasks.git"
+    "url": "https://github.com/Nafta7/toska.git"
   },
   "author": "Nafta <naftasan@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Nafta7/gulp-require-tasks/issues"
+    "url": "https://github.com/Nafta7/toska/issues"
   },
-  "homepage": "https://github.com/Nafta7/gulp-require-tasks",
+  "homepage": "https://github.com/Nafta7/toska",
   "dependencies": {
     "fs": "0.0.2",
     "path": "^0.11.14"
