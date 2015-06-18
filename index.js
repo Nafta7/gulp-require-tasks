@@ -6,36 +6,72 @@ var parentFile = parent.filename;
 var parentDir = Path.dirname(parentFile);
 
 module.exports = {
-  loadTasks: function(dir, opts){
-
-    var obj_types = {};
-    var taskName;
-
+  mirror: function(dir, opts){
     dir = dir || '.';
     dir = Path.resolve(parentDir, dir);
+    var folders = getFolders(dir);
 
-    var types = getFolders(dir);
-    types.forEach(function(type){
-      obj_types[type] = [];
-      tasks = getFiles(dir + '/' + type);
-      tasks.forEach(function(file){
-        task = file.replace('.js', '');
-        obj_types[type].push(task);
-        taskName = dir + "/" + type + '/' + task;
-        opts.gulp.task(task, require(taskName)(opts.gulp, opts.path, opts.plugins));
-      });
-    });
-
-    return obj_types;
-  },
-
-  startTasks: function(gulp, tasks){
-    if(tasks !== null && typeof tasks === "object") {
-      Object.keys(tasks).forEach(function(type){
-        gulp.task(type, tasks[type]);
-      });
-    }
+    if (folders.length === 0)
+      return mapFiles(dir, opts);
+    else
+      return mapFolders(dir, folders, opts);
   }
+};
+
+function mapFiles(dir, opts){
+  var tasks = getFiles(dir);
+  var map = [];
+  var taskName;
+  var task;
+  tasks.forEach(function(file){
+    task = file.replace('.js', '');
+    map.push(task);
+    taskName = dir + '/' + task;
+    opts.gulp.task(task, require(taskName)(
+      opts.gulp,
+      opts.path,
+      opts.plugins
+    ));
+  });
+  return map;
+};
+
+function mapFolders(dir, folders, opts){
+  var map = {};
+  var tasks = getFiles(dir);
+  var taskName;
+  var task;
+
+  if (tasks.length > 0){
+    map['root'] = [];
+    tasks.forEach(function(file){
+      task = file.replace('.js', '');
+      map['root'].push(task);
+      taskName = dir + '/' + task;
+      console.log(taskName);
+      opts.gulp.task(task, require(taskName)(
+        opts.gulp,
+        opts.path,
+        opts.plugins
+      ));
+    });
+  }
+  folders.forEach(function(folder){
+    map[folder] = [];
+    tasks = getFiles(dir + '/' + folder);
+    tasks.forEach(function(file){
+      task = file.replace('.js', '');
+      map[folder].push(task);
+      taskName = dir + '/' + folder + '/' + task;
+      opts.gulp.task(task, require(taskName)(
+        opts.gulp,
+        opts.path,
+        opts.plugins
+      ));
+    });
+    opts.gulp.task(folder, map[folder]);
+  });
+  return map;
 };
 
 function getFolders(dir) {

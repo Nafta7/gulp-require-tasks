@@ -1,7 +1,7 @@
 #toska
 A module to automatically start gulp tasks by a given directory. To start the tasks you will need to provide a directory name where the tasks are stored. You you also need to provide a hash with gulp and a path (as a map). See Usage section for examples.
 
-##Usage
+##usage
 
 ```es6
 let path = {
