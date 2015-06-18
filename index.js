@@ -9,6 +9,7 @@ module.exports = {
   loadTasks: function(dir, opts){
 
     var obj_types = {};
+    var taskName;
 
     dir = dir || '.';
     dir = Path.resolve(parentDir, dir);
@@ -20,10 +21,8 @@ module.exports = {
       tasks.forEach(function(file){
         task = file.replace('.js', '');
         obj_types[type].push(task);
-        opts.gulp.task(task, require(dir + "/" + type + '/' + task)(opts.gulp,
-                                                               opts.path,
-                                                               opts.plugins
-                                                               ));
+        taskName = dir + "/" + type + '/' + task;
+        opts.gulp.task(task, require(taskName)(opts.gulp, opts.path, opts.plugins));
       });
     });
 
