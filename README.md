@@ -1,12 +1,15 @@
 # toska
 
-A module to automatically start gulp tasks by a given directory. To start the tasks you will need to provide a directory name where the tasks are stored and a hash with gulp and a path (as a map). See usage section for examples.
+A module to automatically start gulp tasks by a given directory.
 
 # usage
 
+To start the tasks you will need to provide a directory name in which your tasks
+resides along with gulp.
+
 ```es6
 import toska from 'toska';
-toska.mirror('gulp_tasks', {gulp: gulp, path: path, plugins: plugins});
+toska.mirror('gulp_tasks', gulp);
 ```
 
 # install
@@ -18,17 +21,7 @@ npm install git://github.com/Nafta7/toska.git --save
 
 ```es6
 import toska from 'toska';
-
-let opts = {
-  gulp: gulp,
-  path: { 
-    styles:  { src: 'styles', dest: 'www/styles' },
-    scripts: { src: 'scripts', dest: 'www/scripts' }
-  },
-  plugins: {browserSync: browserSync}
-};
-
-let tasks = toska.mirror('gulp_tasks', opts);
+let tasks = toska.mirror('gulp_tasks', gulp);
 ```
 Given the following directory structure:
 ```
@@ -41,7 +34,7 @@ gulp_tasks/
     minify:js.js
 ```
 
-`toska.mirror('gulp_tasks', opts)` will return the equivalent of:
+`toska.mirror('gulp_tasks', gulp)` will return the equivalent of:
 
 ```js
 {
@@ -50,7 +43,8 @@ gulp_tasks/
 }
 ```
 Toska will automatically start all tasks and their dependencies following
-the directory structure passed to `mirror`. Running `gulp -T` with the previous directory structure will result in the following task tree:
+the directory structure passed to `mirror`. Running `gulp -T` with the previous
+directory structure will result in the following task tree:
 
 ```
 build
@@ -60,7 +54,41 @@ deploy
 ├──minify:css
 ├──minify:js
 ```
-	
+
+# options
+
+`options`: Can be whatever you want to  be made available to all of your tasks,
+options are dynamically expanded to your tasks. See:
+
+```es6
+import toska from 'toska';
+
+let opts = {
+  path: {
+    styles:  { src: 'styles', dest: 'www/styles' },
+    scripts: { src: 'scripts', dest: 'www/scripts' }
+  },
+  plugins: { browserSync: browserSync }
+};
+
+let tasks = toska.mirror('gulp_tasks', gulp, opts);
+```
+
+With this configuration, your tasks will receive all options expanded like this:
+
+```es6
+module.exports = (gulp, path, plugins) => {
+  return () =>
+    path.styes; // { src: 'styles', dest: 'www/styles' }
+    plugins;    // { browserSync: browserSync }
+    // Your tasks...
+  };
+}
+```
+
+`gulp` will always be available to all your tasks inside the directory you
+provided to toska.
+
 # license
 
 MIT

@@ -1,12 +1,12 @@
 var gulp = require('gulp');
 var toska = require('..');
-var opts = {gulp: gulp, path: {}, plugins: {}};
+var opts = {path: {}, plugins: {}};
 
 exports.testTree = {
   'should display a nice tree in the console': function(test){
     var taskTree = require('../node_modules/gulp/lib/taskTree');
     var archy = require('archy');
-    var tasks = toska.mirror('mix', opts);
+    var tasks = toska.mirror('mix', gulp, opts);
     var tree = taskTree(gulp.tasks);
     archy(tree)
       .split('\n')

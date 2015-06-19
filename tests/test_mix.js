@@ -1,10 +1,10 @@
 var gulp = require('gulp');
 var toska = require('..');
-var opts = {gulp: gulp, path: {}, plugins: {}};
+var opts = {path: {}, plugins: {}};
 
 exports.mixFolderFiles = {
   'should map tasks for all files and folders': function(test){
-    var tasks = toska.mirror('mix', opts);
+    var tasks = toska.mirror('mix', gulp, opts);
 
     test.deepEqual(tasks, {
       root: ['a', 'b'], build: ['c', 'd', 'e']

@@ -1,10 +1,10 @@
 var gulp = require('gulp');
 var toska = require('..');
-var opts = {gulp: gulp, path: {}, plugins: {}};
+var opts = {path: {}, plugins: {}};
 
 exports.multipleFolders = {
   setUp: function(cb){
-    this.tasks = toska.mirror('multiple', opts);
+    this.tasks = toska.mirror('multiple', gulp, opts);
     this.fn_a = require('./multiple/build/a');
     this.fn_b = require('./multiple/build/b');
     this.fn_c = require('./multiple/build/c');

@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var toska = require('..');
-var opts = {gulp: gulp, path: {}, plugins: {}};
+var opts = {path: {}, plugins: {}};
 
 exports.singleFolder = {
   setUp: function(cb){
@@ -8,7 +8,7 @@ exports.singleFolder = {
   },
 
   'build folder should be loaded': function(test){
-    var tasks = toska.mirror('single', opts);
+    var tasks = toska.mirror('single', gulp, opts);
     test.deepEqual(tasks, {build: ['a']},
       'build folder not properly loaded.');
     test.done();
