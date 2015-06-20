@@ -1,11 +1,11 @@
 # toska
 
-A module to automatically start gulp tasks by a given directory.
+A module to automatically create gulp tasks by a given directory.
 
 # usage
 
-To start the tasks you will need to provide a directory name in which your tasks
-resides along with gulp.
+For toska automatically create the tasks you will need to provide a directory
+name in which your tasks reside along with gulp.
 
 ```es6
 import toska from 'toska';
@@ -42,9 +42,9 @@ gulp_tasks/
   deploy: ['minify:css', 'minify:js']
 }
 ```
-Toska will automatically start all tasks and their dependencies following
-the directory structure passed to `mirror`. Running `gulp -T` with the previous
-directory structure will result in the following task tree:
+Toska will create all tasks with gulp and their dependencies following the
+directory structure passed to `mirror`. Running `gulp -T` with
+the previous directory structure will result in the following task tree:
 
 ```
 build
@@ -57,7 +57,7 @@ deploy
 
 # options
 
-`options`: Can be whatever you want to  be made available to all of your tasks,
+`options`: Can be whatever you want to be made available to all of your tasks,
 options are dynamically expanded to your tasks. See:
 
 ```es6
@@ -65,8 +65,8 @@ import toska from 'toska';
 
 let opts = {
   path: {
-    styles:  { src: 'styles', dest: 'www/styles' },
-    scripts: { src: 'scripts', dest: 'www/scripts' }
+    styles:  { src: 'styles/', dest: 'www/styles/' },
+    scripts: { src: 'scripts/', dest: 'www/scripts/' }
   },
   plugins: { browserSync: browserSync }
 };
@@ -79,7 +79,7 @@ With this configuration, your tasks will receive all options expanded like this:
 ```es6
 module.exports = (gulp, path, plugins) => {
   return () =>
-    path.styes; // { src: 'styles', dest: 'www/styles' }
+    path.styles; // { src: 'styles/', dest: 'www/styles/' }
     plugins;    // { browserSync: browserSync }
     // Your tasks...
   };
@@ -88,6 +88,10 @@ module.exports = (gulp, path, plugins) => {
 
 `gulp` will always be available to all your tasks inside the directory you
 provided to toska.
+
+# release history
+
+* 0.1.0 Initial release (06/19/2015)
 
 # license
 
