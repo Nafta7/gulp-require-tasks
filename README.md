@@ -1,28 +1,26 @@
-# toska
-
-[![Build Status](https://travis-ci.org/Nafta7/toska.svg?branch=master)]
+# toska [![Build Status](https://travis-ci.org/Nafta7/toska.svg?branch=master)]
 (https://travis-ci.org/Nafta7/toska)
 
 Automatically create gulp tasks from node modules by a given directory.
+
+# install
+```
+npm install toska
+```
 
 # usage
 
 For toska automatically create the tasks you will need to provide a directory
 name in which your modules reside along with gulp.
 
-```es6
+```js
 import toska from 'toska';
 toska.mirror('gulp_tasks', gulp);
 ```
 
-# install
-```
-npm install git://github.com/Nafta7/toska.git --save
-```
-
 # examples
 
-```es6
+```js
 import toska from 'toska';
 let tasks = toska.mirror('gulp_tasks', gulp);
 ```
