@@ -1,13 +1,14 @@
 # toska
 
-[![Build Status](https://travis-ci.org/Nafta7/toska.svg?branch=master)](https://travis-ci.org/Nafta7/toska)
+[![Build Status](https://travis-ci.org/Nafta7/toska.svg?branch=master)]
+(https://travis-ci.org/Nafta7/toska)
 
-A module to automatically create gulp tasks by a given directory.
+Automatically create gulp tasks from node modules by a given directory.
 
 # usage
 
 For toska automatically create the tasks you will need to provide a directory
-name in which your tasks reside along with gulp.
+name in which your modules reside along with gulp.
 
 ```es6
 import toska from 'toska';
@@ -59,10 +60,10 @@ deploy
 
 # options
 
-`options`: Can be whatever you want to be made available to all of your tasks,
-options are dynamically expanded to your tasks. See:
+`options`: Can be whatever you want to be made available to all of your modules,
+options are dynamically expanded to the modules. See:
 
-```es6
+```js
 import toska from 'toska';
 
 let opts = {
@@ -76,19 +77,25 @@ let opts = {
 let tasks = toska.mirror('gulp_tasks', gulp, opts);
 ```
 
-With this configuration, your tasks will receive all options expanded like this:
+With this configuration, your modules will receive all options expanded. See
+a module example:
 
-```es6
+```js
+// gulp_tasks/build/compile:sass.js <- A simple node module
+import sass from 'gulp-sass';
+import rename from 'gulp-rename';
+
 module.exports = (gulp, path, plugins) => {
-  return () =>
-    path.styles; // { src: 'styles/', dest: 'www/styles/' }
-    plugins;    // { browserSync: browserSync }
-    // Your tasks...
+  return () => {
+    gulp.src([`${path.styles.src}**/*.sass`])
+    .pipe(sass())
+    .pipe(gulp.dest(path.styles.dest))
+    .pipe(plugins.browserSync.stream());
   };
-}
+};
 ```
 
-`gulp` will always be available to all your tasks inside the directory you
+`gulp` will always be available to all your modules inside the directory you
 provided to toska.
 
 # release history
