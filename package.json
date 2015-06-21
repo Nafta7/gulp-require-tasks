@@ -1,7 +1,7 @@
 {
   "name": "toska",
   "version": "0.1.2",
-  "description": "A module to automatically create gulp tasks by a given directory",
+  "description": "Automatically create gulp tasks from node modules by a given directory.",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/nodeunit test/ --reporter nested"

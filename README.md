@@ -1,6 +1,7 @@
-# toska [![Build Status](https://travis-ci.org/Nafta7/toska.svg?branch=master)](https://travis-ci.org/Nafta7/toska)
+# toska 
 
-Automatically create gulp tasks from node modules by a given directory.
+[![Build Status](https://travis-ci.org/Nafta7/toska.svg?branch=master)]
+(https://travis-ci.org/Nafta7/toska)
 
 # install
 ```
