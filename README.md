@@ -1,5 +1,7 @@
 # toska
 
+[<img src="https://travis-ci.org/Nafta7/toska.svg?branch=master" alt="Build status" >] (https://travis-ci.org/Nafta7/toska)
+
 A module to automatically create gulp tasks by a given directory.
 
 # usage
