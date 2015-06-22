@@ -1,7 +1,6 @@
-# toska 
+# toska
 
-[![Build Status](https://travis-ci.org/Nafta7/toska.svg?branch=master)]
-(https://travis-ci.org/Nafta7/toska)
+[![Build Status](https://travis-ci.org/Nafta7/toska.svg?branch=master)](https://travis-ci.org/Nafta7/toska)
 
 # install
 ```
@@ -28,32 +27,27 @@ Given the following directory structure:
 ```
 gulp_tasks/
   build/
+    compile:js.js
     compile:sass.js
-    compile:scripts.js
   deploy/
     minify:css.js
     minify:js.js
 ```
 
-`toska.mirror('gulp_tasks', gulp)` will return the equivalent of:
-
-```js
-{
-  build: ['compile:sass', 'compile:js']
-  deploy: ['minify:css', 'minify:js']
-}
-```
 Toska will create all tasks with gulp and their dependencies following the
 directory structure passed to `mirror`. Running `gulp -T` with
 the previous directory structure will result in the following task tree:
 
 ```
-build
-├──compile:sass.js
-├──compile:js.js
-deploy
-├──minify:css
-├──minify:js
+├── compile:js
+├── compile:sass
+├─┬ build
+│ ├── compile:js
+│ └── compile:sass
+├── minify:css
+└─┬ deploy
+  ├── minify:css
+  └── minify:js
 ```
 
 # options
