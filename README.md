@@ -45,6 +45,7 @@ the previous directory structure will result in the following task tree:
 │ ├── compile:js
 │ └── compile:sass
 ├── minify:css
+├── minify:js
 └─┬ deploy
   ├── minify:css
   └── minify:js
