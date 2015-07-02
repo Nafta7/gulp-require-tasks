@@ -33,21 +33,5 @@ exports.multipleFolders = {
     test.equal(gulp.tasks.e.fn.toString(), this.fn_e().toString(),
       'failed to create task e.');
     test.done()
-  },
-
-  'should create all task with dependencies': function(test){
-    test.deepEqual(gulp.tasks['build'].dep, ['a', 'b', 'c'],
-      'failed to create build task dependencies.');
-    test.deepEqual(gulp.tasks['deploy'].dep, ['d', 'e'],
-      'failed to create deploy task dependencies.')
-    test.done();
-  },
-
-  'should mirror all task and create dependencies': function(test){
-    test.deepEqual(gulp.tasks['build'].dep, ['a', 'b', 'c'],
-      'gulp failed to load build task dependencies.');
-    test.deepEqual(gulp.tasks['deploy'].dep, ['d', 'e'],
-      'gulp failed to load deploy task dependencies.')
-    test.done();
   }
 };

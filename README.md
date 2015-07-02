@@ -34,21 +34,15 @@ gulp_tasks/
     minify:js.js
 ```
 
-Toska will create all tasks with gulp and their dependencies following the
+Toska will create all tasks with gulp from modules in the
 directory structure passed to `mirror`. Running `gulp -T` with
 the previous directory structure will result in the following task tree:
 
 ```
 ├── compile:js
 ├── compile:sass
-├─┬ build
-│ ├── compile:js
-│ └── compile:sass
 ├── minify:css
 ├── minify:js
-└─┬ deploy
-  ├── minify:css
-  └── minify:js
 ```
 
 # options

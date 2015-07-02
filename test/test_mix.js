@@ -10,9 +10,6 @@ exports.mixFolderFiles = {
       root: ['a', 'b'], build: ['c', 'd', 'e']
     }, 'folders/files failed to load.');
 
-    test.deepEqual(gulp.tasks['build'].dep, ['c', 'd', 'e'],
-      'failed to create build task dependencies.');
-
     test.equal(gulp.tasks['a'].fn.toString(), require('./mix/a')().toString(),
       'failed to create task a');
     test.equal(gulp.tasks['b'].fn.toString(), require('./mix/b')().toString(),

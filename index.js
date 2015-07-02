@@ -75,7 +75,6 @@ function mapFolders(dir, folders, gulp, opts){
       taskName = dir + '/' + folder + '/' + task;
       gulp.task(task, require(taskName).apply(null, args));
     });
-    gulp.task(folder, map[folder]);
   });
   return map;
 };
