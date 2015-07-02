@@ -7,17 +7,21 @@
 npm install toska
 ```
 
-# usage
+## api
 
-For toska automatically create the tasks you will need to provide a directory
-name in which your modules reside along with gulp.
+### `toska.reflect(dir, [options])` => [Map]
 
-```js
-import toska from 'toska';
-toska.mirror('gulp_tasks', gulp);
-```
+Reflect takes a directory and returns a `Map`, mapping each directory and
+the modules inside.
 
-# examples
+If options are provided, it will be passed to your modules as arguments expanded.
+
+### `toska.mirror(dir, gulp, [options])` => [Map] # Deprecated
+
+Mirror takes a directory and a gulp instance. It will automatically create
+gulp tasks based on all modules inside the directory name provided.
+
+#### example
 
 ```js
 import toska from 'toska';
@@ -33,9 +37,7 @@ gulp_tasks/
     minify:css.js
     minify:js.js
 ```
-
-Toska will create all tasks with gulp from modules in the
-directory structure passed to `mirror`. Running `gulp -T` with
+Running `gulp -T` with
 the previous directory structure will result in the following task tree:
 
 ```
@@ -45,7 +47,7 @@ the previous directory structure will result in the following task tree:
 ├── minify:js
 ```
 
-# options
+## options
 
 `options`: Can be whatever you want to be made available to all of your modules,
 options are dynamically expanded to the modules. See:
@@ -82,13 +84,11 @@ module.exports = (gulp, path, plugins) => {
 };
 ```
 
-`gulp` will always be available to all your modules inside the directory you
-provided to toska.
-
-# release history
+## release history
 
 * 0.1.0 Initial release (06/19/2015)
+* 0.1.5 Add new API function: reflect (07/02/2015)
 
-# license
+## license
 
 MIT
