@@ -1,6 +1,6 @@
 {
   "name": "toska",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Automatically create gulp tasks from node modules by a given directory.",
   "main": "index.js",
   "scripts": {
