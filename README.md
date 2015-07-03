@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/Nafta7/toska.svg?branch=master)](https://travis-ci.org/Nafta7/toska)
 
+Easily load modules from a given directory.
+
 # install
 ```
 npm install toska
@@ -13,38 +15,41 @@ npm install toska
 
 Reflect takes a directory and returns a `Map`, mapping each directory and
 the modules inside.
-
 If options are provided, it will be passed to your modules as arguments expanded.
-
-### `toska.mirror(dir, gulp, [options])` => [Map] # Deprecated
-
-Mirror takes a directory and a gulp instance. It will automatically create
-gulp tasks based on all modules inside the directory name provided.
 
 #### example
 
 ```js
 import toska from 'toska';
-let tasks = toska.mirror('gulp_tasks', gulp);
+let tasks = toska.reflect('tasks');
 ```
 Given the following directory structure:
 ```
 gulp_tasks/
   build/
-    compile:js.js
-    compile:sass.js
+    compile_js.js
+    compile_sass.js
   deploy/
-    minify:css.js
-    minify:js.js
+    minify_css.js
+    minify_js.js
 ```
-Running `gulp -T` with
-the previous directory structure will result in the following task tree:
+`reflect` will return the following map:
 
-```
-├── compile:js
-├── compile:sass
-├── minify:css
-├── minify:js
+```js
+{
+  compile_js: [Function: compile_js],
+  compile_sass: [Function: compile_sass],
+  build: {
+    compile_js: Function: compile_js],
+    compile_sass: [Function: compile_js]
+  },
+  minify_css: [Function: minify_css],
+  minify_js: [Function: minify_js],
+  deploy: {
+    minify_css: [Function: minify_css],
+    minify_js: [Function: minify_js]
+  }
+}
 ```
 
 ## options
@@ -56,6 +61,7 @@ options are dynamically expanded to the modules. See:
 import toska from 'toska';
 
 let opts = {
+  gulp: gulp,
   path: {
     styles:  { src: 'styles/', dest: 'www/styles/' },
     scripts: { src: 'scripts/', dest: 'www/scripts/' }
@@ -63,14 +69,14 @@ let opts = {
   plugins: { browserSync: browserSync }
 };
 
-let tasks = toska.mirror('gulp_tasks', gulp, opts);
+let tasks = toska.reflect('tasks', opts);
 ```
 
 With this configuration, your modules will receive all options expanded. See
 a module example:
 
 ```js
-// gulp_tasks/build/compile:sass.js <- A simple node module
+// tasks/build/compile:sass.js <- A simple node module
 import sass from 'gulp-sass';
 import rename from 'gulp-rename';
 
