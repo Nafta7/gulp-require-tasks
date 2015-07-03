@@ -28,7 +28,8 @@ exports.multiple = {
       }
     };
     var tasks = toska.reflect('multiple');
-    test.deepEqual(tasks, tasksExpected);
+    test.deepEqual(tasks.build, tasksExpected.build);
+    test.deepEqual(tasks.deploy, tasksExpected.deploy);
     test.done();
   }
 };
@@ -60,7 +61,8 @@ exports.mix = {
     };
 
     var tasks = toska.reflect('mix');
-    test.deepEqual(tasks, tasksExpected);
+    test.deepEqual(tasks.build, tasksExpected.build);
+    test.deepEqual(tasks.root, tasksExpected.root);
     test.done();
   }
 };
@@ -77,6 +79,32 @@ exports.options = {
     var opts = {gulp: null, path: path, plugins: plugins};
     var tasks = toska.reflect('options', opts);
     test.equal(tasks.a().path, path);
+    test.done();
+  }
+};
+
+exports.exposeModules= {
+  setUp: function(callback){
+    this.dir = './mix/';
+    this.modulA = require(this.dir + 'a');
+    this.modulB = require(this.dir + 'b');
+    this.modulC = require(this.dir + 'build/c');
+    this.modulD = require(this.dir + 'build/d');
+    this.modulE = require(this.dir + 'build/e');
+
+    callback();
+  },
+
+  'should expose all modules to the map': function(test){
+    var moduls = toska.reflect('mix');
+    test.equal(moduls['a'].toString(),          this.modulA.toString());
+    test.equal(moduls['b'].toString(),          this.modulB.toString());
+    test.equal(moduls['b'].toString(),          this.modulB.toString());
+    test.equal(moduls['c'].toString(),          this.modulC.toString());
+    test.equal(moduls.build['c'].toString(),    this.modulC.toString());
+    test.equal(moduls.build['d'].toString(),    this.modulD.toString());
+    test.equal(moduls.build['e'].toString(),    this.modulE.toString());
+    test.equal(moduls.a.toString(),             this.modulA.toString());
     test.done();
   }
 };
