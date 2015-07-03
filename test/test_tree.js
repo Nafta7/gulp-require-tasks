@@ -3,19 +3,18 @@ var toska = require('..');
 var opts = {path: {}, plugins: {}};
 
 exports.testTree = {
-  'should display a nice tree in the console': function(test){
-    var taskTree = require('../node_modules/gulp/lib/taskTree');
+  'should match a valid tree': function(test){
+    var treefy = require('../lib/treefy');
     var archy = require('archy');
-    var tasks = toska.mirror('mix', gulp, opts);
-    var tree = taskTree(gulp.tasks);
-    archy(tree)
-      .split('\n')
-      .forEach(function(v) {
-        if (v.trim().length === 0) {
-         return;
-        }
-        console.log(v);
-      });
-     test.done();
+    var tasks = toska.reflect('mix');
+    var tree = archy(treefy(tasks));
+    
+    var expectedTree = "├── a" + "├─┬ root" + "│ ├── a" + "│ └── b" + "├── b" +
+      "├── c" + "├── d" + "├── e" + "└─┬ build" +"  ├──c" + "  ├──d" + "└──e";
+    tree = tree.replace(/\s/g, '');
+    expectedTree = expectedTree.replace(/\s/g, '');
+
+    test.deepEqual(tree, expectedTree);
+    test.done();
   }
 };
