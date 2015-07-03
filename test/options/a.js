@@ -1,5 +1,5 @@
-module.exports = function(gulp, path, plugins){
+module.exports = function(path, plugins){
   return function(){
-    return {gulp: gulp, path: path, plugins: plugins};
+    return {path: path, plugins: plugins};
   }
 }

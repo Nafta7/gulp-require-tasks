@@ -1,4 +1,3 @@
-var gulp = require('gulp');
 var toska = require('..');
 exports.single = {
   setUp: function(cb){
@@ -76,7 +75,7 @@ exports.options = {
     var plugins = {
       pin: 'pin'
     };
-    var opts = {gulp: null, path: path, plugins: plugins};
+    var opts = {path: path, plugins: plugins};
     var tasks = toska.reflect('options', opts);
     test.equal(tasks.a().path, path);
     test.done();
