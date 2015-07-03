@@ -28,7 +28,8 @@ exports.multiple = {
       }
     };
     var tasks = toska.reflect('multiple');
-    test.deepEqual(tasks, tasksExpected);
+    test.deepEqual(tasks.build, tasksExpected.build);
+    test.deepEqual(tasks.deploy, tasksExpected.deploy);
     test.done();
   }
 };
@@ -60,7 +61,8 @@ exports.mix = {
     };
 
     var tasks = toska.reflect('mix');
-    test.deepEqual(tasks, tasksExpected);
+    test.deepEqual(tasks.build, tasksExpected.build);
+    test.deepEqual(tasks.root, tasksExpected.root);
     test.done();
   }
 };
