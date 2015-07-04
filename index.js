@@ -1,7 +1,7 @@
 var fs = require('fs'),
     Path = require('path'),
     io = require('./lib/io'),
-    reflect = require('./src/reflect');
+    mapper = require('./src/toska_mapper');
 
 var parent = module.parent,
     parentFile = parent.filename,
@@ -13,9 +13,9 @@ function reflectApi(dir, opts){
   var folders = io.getFolders(dir);
 
   if (folders.length === 0)
-    return reflect.mapFiles(dir, opts);
+    return mapper.mapFiles(dir, opts);
   else
-    return reflect.mapFolders(dir, folders, opts);
+    return mapper.mapFolders(dir, folders, opts);
 }
 
 module.exports = reflectApi;
