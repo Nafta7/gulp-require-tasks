@@ -86,11 +86,6 @@ module.exports = (gulp, path, $) => {
 };
 ```
 
-## Release history
-
-* 0.1.0 Initial release (06/19/2015)
-* 0.1.5 Add new API function: reflect (07/02/2015)
-
 ## License
 
 MIT
