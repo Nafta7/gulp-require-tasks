@@ -59,14 +59,11 @@ options are dynamically expanded to the modules. See:
 ```js
 import toska from 'toska';
 
-let opts = {
-  gulp: gulp,
-  path: {
-    styles:  { src: 'styles/', dest: 'www/styles/' },
-    scripts: { src: 'scripts/', dest: 'www/scripts/' }
-  },
-  plugins: { browserSync: browserSync }
+let path = {
+  styles:  { src: 'styles/', dest: 'www/styles/' },
+  scripts: { src: 'scripts/', dest: 'www/scripts/' }
 };
+let plugins = { browserSync: browserSync };
 
 let tasks = toska('tasks', {gulp: gulp, path: path, $: plugins});
 ```
