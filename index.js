@@ -18,6 +18,4 @@ function reflectApi(dir, opts){
     return reflect.mapFolders(dir, folders, opts);
 }
 
-module.exports = {
-  reflect: reflectApi
-};
+module.exports = reflectApi;
