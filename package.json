@@ -1,6 +1,6 @@
 {
   "name": "toska",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "Easily load modules from a given directory",
   "main": "index.js",
   "scripts": {

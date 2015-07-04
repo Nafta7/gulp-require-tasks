@@ -5,7 +5,7 @@ exports.single = {
   },
 
   'should reflect single folder in an object literal': function(test){
-    var tasks = toska.reflect('single');
+    var tasks = toska('single');
     var a = require('./single/build/a');
     var build = {'a': a };
     test.deepEqual(tasks.build, build);
@@ -26,7 +26,7 @@ exports.multiple = {
         'e': require('./multiple/deploy/e')
       }
     };
-    var tasks = toska.reflect('multiple');
+    var tasks = toska('multiple');
     test.deepEqual(tasks.build, tasksExpected.build);
     test.deepEqual(tasks.deploy, tasksExpected.deploy);
     test.done();
@@ -39,7 +39,7 @@ exports.root = {
       'a': require('./root/a'),
       'b': require('./root/b')
     };
-    var tasks = toska.reflect('root');
+    var tasks = toska('root');
     test.deepEqual(tasks, tasksExpected);
     test.done();
   }
@@ -59,7 +59,7 @@ exports.mix = {
       }
     };
 
-    var tasks = toska.reflect('mix');
+    var tasks = toska('mix');
     test.deepEqual(tasks.build, tasksExpected.build);
     test.deepEqual(tasks.root, tasksExpected.root);
     test.done();
@@ -76,7 +76,7 @@ exports.options = {
       pin: 'pin'
     };
     var opts = {path: path, plugins: plugins};
-    var tasks = toska.reflect('options', opts);
+    var tasks = toska('options', opts);
     test.equal(tasks.a().path, path);
     test.done();
   }
@@ -95,7 +95,7 @@ exports.exposeModules= {
   },
 
   'should expose all modules to the map': function(test){
-    var moduls = toska.reflect('mix');
+    var moduls = toska('mix');
     test.equal(moduls['a'].toString(),          this.modulA.toString());
     test.equal(moduls['b'].toString(),          this.modulB.toString());
     test.equal(moduls['b'].toString(),          this.modulB.toString());

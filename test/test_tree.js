@@ -5,7 +5,7 @@ exports.testTree = {
   'should match a valid tree': function(test){
     var treefy = require('../lib/treefy');
     var archy = require('archy');
-    var tasks = toska.reflect('mix');
+    var tasks = toska('mix');
     var tree = archy(treefy(tasks));
 
     var expectedTree = "├── a" + "├─┬ root" + "│ ├── a" + "│ └── b" + "├── b" +

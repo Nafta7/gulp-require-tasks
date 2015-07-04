@@ -6,22 +6,13 @@ function mapFolders(dir, folders, opts){
   var task;     // combines dir + path in order to require modules
   var modul;    // holds a module
 
-  // in case options are provided,
-  // build an array to be used with fn.apply later on
-  var args;
-  if (opts !== undefined) {
-    var args = Object.keys(opts).map(function(key){
-      return opts[key];
-    });
-  }
-
   // maps the root
   var files = io.getFiles(dir);
   if (files.length > 0){
     files.forEach(function(file){
       file = file.replace('.js', '');
       task = dir + '/' + file;
-      modul = requirer(task, opts, args);
+      modul = requirer(task, opts);
       obj[file] = modul;
       map[file] = modul;
       map['root'] = obj;
@@ -35,7 +26,7 @@ function mapFolders(dir, folders, opts){
     files.forEach(function(file){
       file = file.replace('.js', '');
       task = dir + '/' + folder + '/' + file;
-      modul = requirer(task, opts, args);
+      modul = requirer(task, opts);
       obj[file] = modul;
       map[file] = modul;
     });
@@ -50,27 +41,27 @@ function mapFiles(dir, opts){
   var task;     // combines dir + path to be required later on
   var modul;    // holds a module
 
-  // in case options are provided,
-  // build an array to be used with fn.apply later on
-  var args;
-  if (opts !== undefined){
-    var args = Object.keys(opts).map(function(key){
-      return opts[key];
-    });
-  }
-
   var files = io.getFiles(dir);
   files.forEach(function(file){
     file = file.replace('.js', '');
     task = dir + '/' + file;
-     modul = requirer(task, opts, args);
+     modul = requirer(task, opts);
      map[file] = modul;
 
   });
   return map;
 }
 
-function requirer(task, opts, args){
+function requirer(task, opts){
+  // in case options are provided,
+  // build an array to be used with fn.apply
+  var args;
+  if (opts !== undefined) {
+    args = Object.keys(opts).map(function(key){
+      return opts[key];
+    });
+  }
+
   return opts
     ? require(task).apply(null, args)
     : require(task);
