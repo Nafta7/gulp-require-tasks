@@ -4,7 +4,7 @@ exports.single = {
     cb();
   },
 
-  'should reflect single folder in an object literal': function(test){
+  'should map a single folder': function(test){
     var tasks = toska('single');
     var a = require('./single/build/a');
     var build = {'a': a };
@@ -14,7 +14,7 @@ exports.single = {
 };
 
 exports.multiple = {
-  'should reflect multiple folders in an object literal': function(test){
+  'should map multiple folders': function(test){
     var tasksExpected = {
       build: {
         'a': require('./multiple/build/a'),
@@ -34,7 +34,7 @@ exports.multiple = {
 };
 
 exports.root = {
-  'should reflect root as flat object literal': function(test){
+  'should map root files': function(test){
     var tasksExpected = {
       'a': require('./root/a'),
       'b': require('./root/b')
@@ -46,7 +46,7 @@ exports.root = {
 };
 
 exports.mix = {
-  'should reflect a mix of root and folder as object literal': function(test){
+  'should map a mix of folder and files': function(test){
     var tasksExpected = {
       build: {
         'c': require('./mix/build/c'),
