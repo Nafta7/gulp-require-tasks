@@ -67,9 +67,9 @@ function requirer(task, opts){
     : require(task);
 }
 
-var reflect = {
+var mapper = {
   mapFiles: mapFiles,
   mapFolders: mapFolders
 };
 
-module.exports = reflect;
+module.exports = mapper;
