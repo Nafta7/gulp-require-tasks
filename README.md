@@ -1,5 +1,5 @@
 # modula-loader
-[![Build Status](https://travis-ci.org/Nafta7/toska.svg?branch=master)](https://travis-ci.org/Nafta7/toska)
+[![Build Status](https://travis-ci.org/Nafta7/modula-loader.svg?branch=master)](https://travis-ci.org/Nafta7/modula-loader)
 
 A module loader that lets you pass parameters to your modules.
 
