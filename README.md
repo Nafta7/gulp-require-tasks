@@ -1,17 +1,16 @@
-# toska
-
+# modula-loader
 [![Build Status](https://travis-ci.org/Nafta7/toska.svg?branch=master)](https://travis-ci.org/Nafta7/toska)
 
-Load modules from a given directory.
+A module loader that lets you pass parameters to your modules.
 
 # Installation
 ```
-npm install toska
+npm install modula-loader
 ```
 
 ## Usage
 
-### `toska(dir [, options])` => [Map]
+### `modulaLoader(dir [, options])` => [Map]
 
 Takes a directory and returns a `Map`.
 If options are provided, it will be passed to your modules as arguments expanded.
@@ -19,8 +18,8 @@ If options are provided, it will be passed to your modules as arguments expanded
 #### Example
 
 ```js
-import toska from 'toska';
-let tasks = toska('tasks');
+import modulaLoader from 'modula-loader';
+let modules = modulaLoader('tasks');
 ```
 Given the following directory structure:
 ```
@@ -32,7 +31,7 @@ tasks/
     minify_css.js
     minify_js.js
 ```
-`toska` will return the following map:
+`modulaLoader` will return the following map:
 
 ```js
 {
@@ -57,7 +56,7 @@ tasks/
 options are dynamically expanded to the modules. See:
 
 ```js
-import toska from 'toska';
+import modulaLoader from 'modula-loader';
 
 let path = {
   styles:  { src: 'styles/', dest: 'www/styles/' },
@@ -65,7 +64,7 @@ let path = {
 };
 let plugins = { browserSync: browserSync };
 
-let tasks = toska('tasks', {gulp: gulp, path: path, $: plugins});
+let modules = modulaLoader('tasks', {gulp: gulp, path: path, $: plugins});
 ```
 
 With this configuration, your modules will receive all options expanded. See

@@ -1,21 +1,21 @@
 {
-  "name": "toska",
+  "name": "modula-loader",
   "version": "0.2.0",
-  "description": "Load modules from a given directory",
+  "description": "A module loader that lets you pass parameters to your modules.",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/nodeunit test/ --reporter nested"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nafta7/toska.git"
+    "url": "https://github.com/Nafta7/modula-loader.git"
   },
   "author": "Nafta <naftasan@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Nafta7/toska/issues"
+    "url": "https://github.com/Nafta7/modula-loader/issues"
   },
-  "homepage": "https://github.com/Nafta7/toska",
+  "homepage": "https://github.com/Nafta7/modula-loader",
   "dependencies": {
     "fs": "0.0.2",
     "path": "^0.11.14"
