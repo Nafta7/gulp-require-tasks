@@ -1,21 +1,15 @@
 var fs = require('fs'),
-    Path = require('path'),
-    io = require('./lib/io'),
+    path = require('path'),
+    dir = require('./lib/dir'),
     mapper = require('./src/toska_mapper');
 
-var parent = module.parent,
-    parentFile = parent.filename,
-    parentDir = Path.dirname(parentFile);
-
-function reflectApi(dir, opts){
-  dir = dir || '.';
-  dir = Path.resolve(parentDir, dir);
-  var folders = io.getFolders(dir);
+module.exports = function(dirName, opts){
+  dirName = dirName || '.';
+  dirName = path.resolve(path.dirname(module.parent.filename), dirName);
+  var folders = dir.folders(dirName);
 
   if (folders.length === 0)
-    return mapper.mapFiles(dir, opts);
+    return mapper.mapFiles(dirName, opts);
   else
-    return mapper.mapFolders(dir, folders, opts);
+    return mapper.mapFolders(dirName, folders, opts);
 }
-
-module.exports = reflectApi;
