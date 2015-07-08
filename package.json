@@ -1,6 +1,6 @@
 {
   "name": "modula-loader",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A module loader that lets you pass parameters to your modules.",
   "main": "index.js",
   "scripts": {
