@@ -1,6 +1,6 @@
 > A module loader
 
-[![npm package][npm-ver-link]][fly]
+[![npm package][npm-ver-link]][modula-loader]
 [![][TravisLogo]][Travis]
 ![][mit-badge]
 
@@ -93,3 +93,12 @@ module.exports = (gulp, path, $) => {
 ## License
 
 MIT
+
+[mit-badge]: https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square
+
+[npm-pkg-link]: https://www.npmjs.org/package/modula-loader
+
+[npm-ver-link]: https://img.shields.io/npm/v/modula-loader.svg?style=flat-square
+
+[TravisLogo]: http://img.shields.io/travis/Nafta7/modula-loader.svg?style=flat-square
+[Travis]: https://travis-ci.org/Nafta7/modula-loader
