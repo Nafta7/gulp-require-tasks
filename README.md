@@ -2,7 +2,7 @@
 
 [![npm package][npm-ver-link]][modula-loader]
 [![][TravisLogo]][Travis]
-![][mit-badge][mit]
+[![][mit-badge]][mit]
 
 ## About
 
