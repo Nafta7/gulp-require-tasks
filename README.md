@@ -2,7 +2,7 @@
 
 [![npm package][npm-ver-link]][modula-loader]
 [![][TravisLogo]][Travis]
-![][mit-badge]
+![][mit-badge][mit]
 
 ## About
 
@@ -97,6 +97,7 @@ MIT
 [modula-loader]: https://www.npmjs.com/package/modula-loader
 
 [mit-badge]: https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square
+[mit]: https://github.com/Nafta7/modula-loader/blob/master/LICENSE
 
 [npm-pkg-link]: https://www.npmjs.org/package/modula-loader
 
