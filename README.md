@@ -94,6 +94,8 @@ module.exports = (gulp, path, $) => {
 
 MIT
 
+[modula-loader]: https://www.npmjs.com/package/modula-loader
+
 [mit-badge]: https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square
 
 [npm-pkg-link]: https://www.npmjs.org/package/modula-loader
