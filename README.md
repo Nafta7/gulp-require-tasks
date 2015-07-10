@@ -4,9 +4,7 @@
 [![][TravisLogo]][Travis]
 [![][mit-badge]][mit]
 
-## About
-
-A module loader that lets you pass parameters to your modules.
+> A module loader that lets you pass parameters to your modules.
 
 ## Installation
 ```
@@ -15,53 +13,51 @@ npm install modula-loader
 
 ## Usage
 
-### `modulaLoader(dir [, options])` => [Map]
-
-Takes a directory and returns a `Map`.
+`modula-loader` takes a directory name and returns a `Map`.
 If options are provided, it will be passed to your modules as arguments expanded.
 
-#### Example
-
 ```js
-import modulaLoader from 'modula-loader';
-let modules = modulaLoader('tasks');
+import loader from 'modula-loader';
+let modules = loader('tasks');
 ```
+
+### Example
+
 Given the following directory structure:
 ```
-tasks/
-  build/
-    compile_js.js
-    compile_sass.js
-  deploy/
-    minify_css.js
-    minify_js.js
+tasks
+├── build
+│    ├── compile:js.js
+│    └── compile:sass.js
+└── deploy
+      ├── minify:css.js
+      └── minify:js.js
 ```
-`modulaLoader` will return the following map:
+It will return the following map:
 
 ```js
 {
-  compile_js: [Function: compile_js],
-  compile_sass: [Function: compile_sass],
+  'compile:js': [Function],
+  'compile:sass': [Function],
   build: {
-    compile_js: Function: compile_js],
-    compile_sass: [Function: compile_js]
+    'compile:js': Function],
+    'compile_sass': [Function]
   },
-  minify_css: [Function: minify_css],
-  minify_js: [Function: minify_js],
+  'minify:css': [Function],
+  'minify:js': [Function],
   deploy: {
-    minify_css: [Function: minify_css],
-    minify_js: [Function: minify_js]
+    'minify:css': [Function],
+    'minify:js': [Function]
   }
 }
 ```
 
 ## Options
 
-`options`: Can be whatever you want to be made available to all of your modules,
-options are dynamically expanded to the modules. See:
+`options`: Can be whatever you want to be made available to all of your modules. Options are dynamically expanded. See:
 
 ```js
-import modulaLoader from 'modula-loader';
+import loader from 'modula-loader';
 
 let path = {
   styles:  { src: 'styles/', dest: 'www/styles/' },
@@ -69,11 +65,10 @@ let path = {
 };
 let plugins = { browserSync: browserSync };
 
-let modules = modulaLoader('tasks', {gulp: gulp, path: path, $: plugins});
+let modules = loader('tasks', {gulp: gulp, path: path, $: plugins});
 ```
 
-With this configuration, your modules will receive all options expanded. See
-a module example:
+With this configuration, your modules will receive each option as an argument:
 
 ```js
 // tasks/build/compile:sass.js <- A simple node module
