@@ -1,10 +1,10 @@
-> A module loader
+# modula-loader
 
 [![npm package][npm-ver-link]][modula-loader]
 [![][TravisLogo]][Travis]
 ![][mit-badge]
 
-## Overview
+## About
 
 A module loader that lets you pass parameters to your modules.
 
