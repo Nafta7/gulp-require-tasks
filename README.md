@@ -1,9 +1,14 @@
-# modula-loader
-[![Build Status](https://travis-ci.org/Nafta7/modula-loader.svg?branch=master)](https://travis-ci.org/Nafta7/modula-loader)
+> A module loader
+
+[![npm package][npm-ver-link]][fly]
+[![][TravisLogo]][Travis]
+![][mit-badge]
+
+## Overview
 
 A module loader that lets you pass parameters to your modules.
 
-# Installation
+## Installation
 ```
 npm install modula-loader
 ```
