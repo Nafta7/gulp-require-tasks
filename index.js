@@ -1,7 +1,7 @@
 var fs = require('fs'),
     path = require('path'),
     dir = require('./lib/dir'),
-    mapper = require('./src/toska_mapper');
+    mapper = require('./src/mapper');
 
 module.exports = function(dirName, opts){
   dirName = dirName || '.';
