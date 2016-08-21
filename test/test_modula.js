@@ -75,8 +75,8 @@ exports.options = {
     var plugins = {
       pin: 'pin'
     };
-    var opts = {path: path, plugins: plugins};
-    var tasks = toska('options', opts);
+    var args = {path: path, plugins: plugins};
+    var tasks = toska('options', args);
     test.equal(tasks.a().path, path);
     test.done();
   }

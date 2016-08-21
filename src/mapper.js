@@ -1,6 +1,6 @@
 var dir = require('../lib/dir');
 
-function mapFolders(dirName, folders, opts){
+function mapFolders(dirName, folders, args){
   var map = {}; // mapping modules
   var obj = {}; // hold a single mapping
   var task;     // combines dirName + path in order to require modules
@@ -12,7 +12,7 @@ function mapFolders(dirName, folders, opts){
     files.forEach(function(file){
       file = file.replace('.js', '');
       task = dirName + '/' + file;
-      modul = requirer(task, opts);
+      modul = requirer(task, args);
       obj[file] = modul;
       map[file] = modul;
       map['root'] = obj;
@@ -26,7 +26,7 @@ function mapFolders(dirName, folders, opts){
     files.forEach(function(file){
       file = file.replace('.js', '');
       task = dirName + '/' + folder + '/' + file;
-      modul = requirer(task, opts);
+      modul = requirer(task, args);
       obj[file] = modul;
       map[file] = modul;
     });
@@ -36,7 +36,7 @@ function mapFolders(dirName, folders, opts){
   return map;
 }
 
-function mapFiles(dirName, opts){
+function mapFiles(dirName, args){
   var map = {}; // modules mapping
   var task;     // combines dirName + path to be required later on
   var modul;    // holds a module
@@ -45,24 +45,24 @@ function mapFiles(dirName, opts){
   files.forEach(function(file){
     file = file.replace('.js', '');
     task = dirName + '/' + file;
-     modul = requirer(task, opts);
+     modul = requirer(task, args);
      map[file] = modul;
 
   });
   return map;
 }
 
-function requirer(task, opts){
+function requirer(task, args){
   // in case options are provided,
   // build an array to be used with fn.apply
   var args;
-  if (opts !== undefined) {
-    args = Object.keys(opts).map(function(key){
-      return opts[key];
+  if (args !== undefined) {
+    args = Object.keys(args).map(function(key){
+      return args[key];
     });
   }
 
-  return opts
+  return args
     ? require(task).apply(null, args)
     : require(task);
 }
