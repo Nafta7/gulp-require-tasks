@@ -1,11 +1,11 @@
-var toska = require('..');
+var modula = require('..');
 exports.single = {
   setUp: function(cb){
     cb();
   },
 
   'should map a single folder': function(test){
-    var tasks = toska('single');
+    var tasks = modula('single');
     var a = require('./single/build/a');
     var build = {'a': a };
     test.deepEqual(tasks.build, build);
@@ -26,7 +26,7 @@ exports.multiple = {
         'e': require('./multiple/deploy/e')
       }
     };
-    var tasks = toska('multiple');
+    var tasks = modula('multiple');
     test.deepEqual(tasks.build, tasksExpected.build);
     test.deepEqual(tasks.deploy, tasksExpected.deploy);
     test.done();
@@ -39,7 +39,7 @@ exports.root = {
       'a': require('./root/a'),
       'b': require('./root/b')
     };
-    var tasks = toska('root');
+    var tasks = modula('root');
     test.deepEqual(tasks, tasksExpected);
     test.done();
   }
@@ -59,15 +59,15 @@ exports.mix = {
       }
     };
 
-    var tasks = toska('mix');
+    var tasks = modula('mix');
     test.deepEqual(tasks.build, tasksExpected.build);
     test.deepEqual(tasks.root, tasksExpected.root);
     test.done();
   }
 };
 
-exports.options = {
-  'should accept parameters as options': function(test){
+exports.arguments = {
+  'should accept arguments': function(test){
     var path = {
       styles: {src: 'styles'},
       scripts: {src: 'scripts'}
@@ -76,7 +76,7 @@ exports.options = {
       pin: 'pin'
     };
     var args = {path: path, plugins: plugins};
-    var tasks = toska('options', args);
+    var tasks = modula('arguments', args);
     test.equal(tasks.a().path, path);
     test.done();
   }
@@ -95,7 +95,7 @@ exports.exposeModules= {
   },
 
   'should expose all modules to the map': function(test){
-    var moduls = toska('mix');
+    var moduls = modula('mix');
     test.equal(moduls['a'].toString(),          this.modulA.toString());
     test.equal(moduls['b'].toString(),          this.modulB.toString());
     test.equal(moduls['b'].toString(),          this.modulB.toString());
