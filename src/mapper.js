@@ -1,6 +1,9 @@
 var dir = require('../lib/dir');
 
-function mapFolders(dirName, folders, args){
+function mapFolders(dirName, folders, config){
+  var args = config.args;
+  var opts = config.opts;
+
   var map = {}; // mapping modules
   var obj = {}; // hold a single mapping
   var task;     // combines dirName + path in order to require modules
@@ -36,7 +39,10 @@ function mapFolders(dirName, folders, args){
   return map;
 }
 
-function mapFiles(dirName, args){
+function mapFiles(dirName, config){
+  var args = config.args;
+  var opts = config.opts;
+
   var map = {}; // modules mapping
   var task;     // combines dirName + path to be required later on
   var modul;    // holds a module

@@ -76,8 +76,20 @@ exports.arguments = {
       pin: 'pin'
     };
     var args = {path: path, plugins: plugins};
-    var tasks = modula('arguments', args);
+    var tasks = modula('arguments', {args: args});
     test.equal(tasks.a().path, path);
+    test.done();
+  }
+};
+
+exports.options = {
+  'should accept options': function(test){
+    var opts = {
+      flat: true
+    };
+
+    var moduls = modula('options', {opts: opts});
+    // test.equal(moduls.b, null);
     test.done();
   }
 };
