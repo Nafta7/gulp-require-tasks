@@ -81,17 +81,6 @@ exports.arguments = {
   }
 };
 
-exports.options = {
-  'should accept options': function(test){
-    var opts = {
-      flat: true
-    };
-
-    var moduls = modula('options', {opts: opts});
-    // test.equal(moduls.b, null);
-    test.done();
-  }
-};
 
 exports.exposeModules= {
   setUp: function(callback){
