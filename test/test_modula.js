@@ -53,15 +53,14 @@ exports.mix = {
         'd': require('./mix/build/d'),
         'e': require('./mix/build/e')
       },
-      root: {
-        'a': require('./mix/a'),
-        'b': require('./mix/b')
-      }
+      'a': require('./mix/a'),
+      'b': require('./mix/b')
     };
 
     var tasks = modula('mix');
     test.deepEqual(tasks.build, tasksExpected.build);
-    test.deepEqual(tasks.root, tasksExpected.root);
+    test.deepEqual(tasks['a'], tasksExpected['a']);
+    test.deepEqual(tasks['b'], tasksExpected.b);
     test.done();
   }
 };
