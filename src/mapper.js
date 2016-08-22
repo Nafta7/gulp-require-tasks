@@ -1,81 +1,62 @@
-var dir = require('../lib/dir');
+var path = require('path')
+var walk = require('walkdir')
 
-function mapFolders(dirName, folders, config){
-  var args = config.args;
-  var opts = config.opts;
+function mapper(dirname, config){
+  var args = config.args
+  var opts = config.opts
 
-  var map = {}; // mapping modules
-  var obj = {}; // hold a single mapping
-  var task;     // combines dirName + path in order to require modules
-  var modul;    // holds a module
+  var moduls = {}
+  var modul
+  var base
+  var relative
+  var filename
 
-  // maps the root
-  var files = dir.files(dirName);
-  if (files.length > 0){
-    files.forEach(function(file){
-      file = file.replace('.js', '');
-      task = dirName + '/' + file;
-      modul = requirer(task, args);
-      obj[file] = modul;
-      map[file] = modul;
-      map['root'] = obj;
-    });
-  }
+  walk.sync(dirname,function(pathname,stat){
+    base = path.basename(pathname);
+    filename = base.replace('.js', '')
+    if (stat.isDirectory()){
+      relative = path.relative(dirname, path.parse(pathname).dir);
 
-  // maps subdir
-  folders.forEach(function(folder){
-    obj = {};
-    files = dir.files(dirName + '/' + folder);
-    files.forEach(function(file){
-      file = file.replace('.js', '');
-      task = dirName + '/' + folder + '/' + file;
-      modul = requirer(task, args);
-      obj[file] = modul;
-      map[file] = modul;
-    });
-    map[folder] = obj;
-  });
+      if (relative != '..')
+        moduls[filename] = {}
+    }
+    else {
+        modul = requirer(pathname.replace('.js', ''), args);
+        moduls[filename] = modul;
+        relative = path.relative(dirname, path.parse(pathname).dir);
+        if (relative != ''){
+          defineProp(moduls[relative], filename, modul)
+        }
+    }
+  })
 
-  return map;
+  return moduls
 }
 
-function mapFiles(dirName, config){
-  var args = config.args;
-  var opts = config.opts;
-
-  var map = {}; // modules mapping
-  var task;     // combines dirName + path to be required later on
-  var modul;    // holds a module
-
-  var files = dir.files(dirName);
-  files.forEach(function(file){
-    file = file.replace('.js', '');
-    task = dirName + '/' + file;
-     modul = requirer(task, args);
-     map[file] = modul;
-
-  });
-  return map;
+// http://stackoverflow.com/a/22928207/6598709
+function defineProp(obj, key, value){
+  var config = {
+    value: value,
+    writable: true,
+    enumerable: true,
+    configurable: true
+  }
+  Object.defineProperty(obj, key, config)
 }
 
 function requirer(task, args){
   // in case options are provided,
   // build an array to be used with fn.apply
-  var args;
+  var args
   if (args !== undefined) {
     args = Object.keys(args).map(function(key){
-      return args[key];
-    });
+      return args[key]
+    })
   }
 
   return args
     ? require(task).apply(null, args)
-    : require(task);
+    : require(task)
 }
 
-var mapper = {
-  mapFiles: mapFiles,
-  mapFolders: mapFolders
-};
-
-module.exports = mapper;
+module.exports = mapper
