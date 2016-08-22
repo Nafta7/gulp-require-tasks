@@ -20,7 +20,7 @@ import loader from 'modula-loader';
 let modules = loader('tasks');
 ```
 
-## API
+# API
 
 **loader(dir)**
 
@@ -42,24 +42,24 @@ let moduls = loader(dir, {
   },
   args: {
     arg1: arg1,
-    arg2, arg2
+    arg2: arg2
     ...
   }
 })
 ```
 
-## opts
+# opts
 
 Available `options` include:
  - `flat`: attribute used to ignore subdir structure (default `false`).
  - `include`: specify the file(s) to load
  - `exclude`: specify the file(s) to not load
 
-## args
+# args
 
 Any desired arguments to be passed to the modules.
 
-## Examples
+# Examples
 
 Given the following directory structure:
 ```
@@ -98,7 +98,7 @@ It will return the following to modules:
 }
 ```
 
-## Example with arguments
+# Example with arguments
 
 `args`: Can be whatever you want to be made available to all of your modules.
 `args` are dynamically expanded.
@@ -149,7 +149,7 @@ module.exports = (gulp, path, $) => {
 };
 ```
 
-## Example with options
+# Example with options
 
 Only load a specific set of files
 
@@ -163,7 +163,7 @@ let modules = loader('tasks', {
 })
 ```
 
-## License
+# License
 
 MIT
 
