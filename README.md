@@ -4,7 +4,7 @@
 [![][TravisLogo]][Travis]
 [![][mit-badge]][mit]
 
-> A module loader that lets you pass parameters to your modules.
+> A module loader for node.
 
 ## Installation
 ```
@@ -13,15 +13,53 @@ npm install modula-loader
 
 ## Usage
 
-`modula-loader` takes a directory name and returns a `Map`.
-If options are provided, it will be passed to your modules as arguments expanded.
+`modula-loader` takes a directory name. Only works up to one level deep.
 
 ```js
 import loader from 'modula-loader';
 let modules = loader('tasks');
 ```
 
-### Example
+## API
+
+**loader(dir)**
+
+Load modules inside the specified directory.
+
+```js
+let moduls = loader(dir)
+```
+
+**loader(dir[, config])**
+
+Additionally `modula-loader` supports `options` and `arguments` via `configuration`.
+
+
+```js
+let moduls = loader(dir, {
+  opts: {
+    flat: true
+  },
+  args: {
+    arg1: arg1,
+    arg2, arg2
+    ...
+  }
+})
+```
+
+## opts
+
+Available `options` include:
+ - `flat`: attribute used to ignore subdir structure (default `false`).
+ - `include`: specify the file(s) to load
+ - `exclude`: specify the file(s) to not load
+
+## args
+
+Any desired arguments to be passed to the modules.
+
+## Examples
 
 Given the following directory structure:
 ```
@@ -33,7 +71,15 @@ tasks
       ├── minify:css.js
       └── minify:js.js
 ```
-It will return the following map:
+
+And the code bellow:
+
+```js
+import loader from 'modula-loader';
+let modules = loader('tasks');
+```
+
+It will return the following to modules:
 
 ```js
 {
@@ -41,7 +87,7 @@ It will return the following map:
   'compile:sass': [Function],
   build: {
     'compile:js': Function],
-    'compile_sass': [Function]
+    'compile:sass': [Function]
   },
   'minify:css': [Function],
   'minify:js': [Function],
@@ -52,23 +98,41 @@ It will return the following map:
 }
 ```
 
-## Options
+## Example with arguments
 
-`options`: Can be whatever you want to be made available to all of your modules. Options are dynamically expanded. See:
+`args`: Can be whatever you want to be made available to all of your modules.
+`args` are dynamically expanded.
+
+See:
 
 ```js
 import loader from 'modula-loader';
 
 let path = {
-  styles:  { src: 'styles/', dest: 'www/styles/' },
-  scripts: { src: 'scripts/', dest: 'www/scripts/' }
-};
-let plugins = { browserSync: browserSync };
+  styles:  {
+    src: 'styles/',
+    dest: 'www/styles/'
+  },
+  scripts: {
+    src: 'scripts/',
+    dest: 'www/scripts/'
+  }
+}
 
-let modules = loader('tasks', {gulp: gulp, path: path, $: plugins});
+let plugins = {
+  browserSync: browserSync
+}
+
+let modules = loader('tasks', {
+  args: {
+    gulp: gulp,
+    path: path,
+    $: plugins
+  }
+})
 ```
 
-With this configuration, your modules will receive each option as an argument:
+With this configuration, your modules will receive each `arg` as an argument:
 
 ```js
 // tasks/build/compile:sass.js <- A simple node module
@@ -83,6 +147,20 @@ module.exports = (gulp, path, $) => {
     .pipe($.browserSync.stream());
   };
 };
+```
+
+## Example with options
+
+Only load a specific set of files
+
+```js
+import loader from 'modula-loader';
+
+let modules = loader('tasks', {
+  opts: {
+    include: ['compile:js', 'compile:sass']
+  }
+})
 ```
 
 ## License
