@@ -1,9 +1,12 @@
-var path = require('path')
-var walk = require('walkdir')
+var path = require('path'),
+    walk = require('walkdir'),
+    requirer = require('../lib/requirer'),
+    defineProp = require('../lib/define-prop')
 
 function mapper(dirname, config){
   var args = config.args
-  var opts = config.opts
+  var opts = config.opts || {}
+  opts.flat = opts.flat
 
   var moduls = {}
   var modul
@@ -11,52 +14,34 @@ function mapper(dirname, config){
   var relative
   var filename
 
-  walk.sync(dirname,function(pathname,stat){
+  walk.sync(dirname, function(pathname, stat){
     base = path.basename(pathname);
     filename = base.replace('.js', '')
-    if (stat.isDirectory()){
-      relative = path.relative(dirname, path.parse(pathname).dir);
 
-      if (relative != '..')
-        moduls[filename] = {}
+    if (stat.isDirectory()){
+      if (isInside(dirname, path.parse(pathname).dir))
+        defineProp(moduls, filename, {})
     }
-    else {
-        modul = requirer(pathname.replace('.js', ''), args);
-        moduls[filename] = modul;
-        relative = path.relative(dirname, path.parse(pathname).dir);
-        if (relative != ''){
-          defineProp(moduls[relative], filename, modul)
-        }
+
+    if(stat.isFile()) {
+      modul = requirer(pathname.replace('.js', ''), args);
+      defineProp(moduls, filename, modul)
+      relative = path.relative(dirname, path.parse(pathname).dir);
+      if (isRelative(dirname, path.parse(pathname).dir)){
+        defineProp(moduls[relative], filename , modul)
+      }
     }
   })
 
   return moduls
 }
 
-// http://stackoverflow.com/a/22928207/6598709
-function defineProp(obj, key, value){
-  var config = {
-    value: value,
-    writable: true,
-    enumerable: true,
-    configurable: true
-  }
-  Object.defineProperty(obj, key, config)
+function isInside(from, to) {
+  return path.relative(from, to) != '..'
 }
 
-function requirer(task, args){
-  // in case options are provided,
-  // build an array to be used with fn.apply
-  var args
-  if (args !== undefined) {
-    args = Object.keys(args).map(function(key){
-      return args[key]
-    })
-  }
-
-  return args
-    ? require(task).apply(null, args)
-    : require(task)
+function isRelative(from, to){
+  return path.relative(from, to) != '';
 }
 
 module.exports = mapper
