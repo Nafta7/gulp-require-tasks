@@ -23,5 +23,8 @@
   "devDependencies": {
     "archy": "^1.0.0",
     "nodeunit": "^0.9.1"
+  },
+  "engines": {
+    "node" : ">=0.12"
   }
 }
