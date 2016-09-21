@@ -1,7 +1,7 @@
 {
   "name": "modula-loader",
   "version": "0.3.0",
-  "description": "A module loader that lets you pass parameters to your modules.",
+  "description": "A module loader for node.",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/nodeunit test/ --reporter nested"
