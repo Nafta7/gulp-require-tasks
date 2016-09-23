@@ -17,6 +17,14 @@
   }
 }
 
+#toggle-menu, .toggle-menu-label {
+  padding: 10px 10px;
+}
+
+#toggle-menu:hover, .toggle-menu-label:hover {
+  cursor: pointer;
+}
+
 #toggle-menu[type="checkbox"]:checked ~ .navbar {
   display: block;
 }
