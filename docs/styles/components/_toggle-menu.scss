@@ -1,0 +1,26 @@
+.hamburguer {
+  display: flex;
+  align-items: center;
+  margin-right: .9rem;
+  @include respond-to(small) {
+    display: none;
+  }
+}
+
+#toggle-menu {
+  display: none;
+}
+
+.toggle-menu {
+  @include respond-to(small) {
+    display: none;
+  }
+}
+
+#toggle-menu[type="checkbox"]:checked ~ .navbar {
+  display: block;
+}
+
+.active {
+  display: inherit;
+}

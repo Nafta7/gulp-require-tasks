@@ -1,0 +1,20 @@
+extends modules/layout.pug
+
+block content
+  include components/header-tile.pug
+  #intro
+    include modules/intro.pug
+  #install
+    include modules/install.pug
+  #usage
+    include modules/usage.pug
+  #api
+    include modules/api.pug
+  #examples
+    include modules/examples.pug
+  #license
+    include modules/license.pug
+
+  include components/footer.pug
+
+  a(href="#" id="back-top") #[span#arrow-up ^]

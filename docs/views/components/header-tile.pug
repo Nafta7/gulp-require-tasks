@@ -1,0 +1,11 @@
+.header-tile-wrapper
+  .container.header-tile
+    .header-tile-logo
+      a(href="http://github.com/nafta7/modula-loader").logo
+        | modula loader
+    .hamburguer
+      input(type="checkbox" id="toggle-menu" name="toggle-menu" class="toggle-menu")
+      label(for="toggle-menu" class="toggle-menu-label")
+        |  #[span#menu-icon &#9776;] Menu
+    .header-tile-nav
+      include navbar.pug

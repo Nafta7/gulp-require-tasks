@@ -1,0 +1,125 @@
+.container
+  .content
+    h2.title Examples
+    p Given the following directory structure:
+
+.tile
+  .container
+    pre
+      code.language-bash
+        | tasks
+        | &#x251c;&#x2500;&#x2500; build
+        | &#x2502;    &#x251c;&#x2500;&#x2500; compile:js.js
+        | &#x2502;    &#x2514;&#x2500;&#x2500; compile:sass.js
+        | &#x2514;&#x2500;&#x2500; deploy
+        | &#x251c;&#x2500;&#x2500; minify:css.js
+        | &#x2514;&#x2500;&#x2500; minify:js.js
+
+.container
+  .content
+    p And the code bellow:
+
+
+.tile
+  .container
+    pre
+      code.language-js
+        | import loader from 'modula-loader'
+        | let modules = loader('tasks')
+
+.container
+  .content
+    p It will return the following to modules:
+
+.tile
+  .container
+    pre
+      code.language-js
+        |{
+        |   'compile:js': [Function],
+        |   'compile:sass': [Function],
+        |   build: {
+        |     'compile:js': Function],
+        |     'compile:sass': [Function]
+        |   },
+        |   'minify:css': [Function],
+        |   'minify:js': [Function],
+        |   deploy: {
+        |     'minify:css': [Function],
+        |     'minify:js': [Function]
+        |   }
+        | }
+
+.container
+  .content
+    h2.title Example with arguments
+    p args: Can be whatever you want to be made available to all of your modules.
+      | args are dynamically expanded.
+
+
+.tile
+  .container
+    pre
+      code.language-js
+        |  import loader from 'modula-loader';
+
+        |  let path = {
+        |    styles:  {
+        |      src: 'styles/',
+        |      dest: 'www/styles/'
+        |    },
+        |    scripts: {
+        |      src: 'scripts/',
+        |      dest: 'www/scripts/'
+        |    }
+        |  }
+
+        |  let plugins = {
+        |    browserSync: browserSync
+        |  }
+
+        |  let modules = loader('tasks', {
+        |    args: {
+        |      gulp: gulp,
+        |      path: path,
+        |      $: plugins
+        |    }
+        |  })
+
+.container
+  .content
+    p With this configuration, your modules will receive each arg as an argument:
+
+.tile
+  .container
+    pre
+      code.language-js
+        | // tasks/build/compile:sass.js <- A simple node module
+        | import sass from 'gulp-sass'
+        | import rename from 'gulp-rename'
+        | module.exports = (gulp, path, $) => {
+        |   return () => {
+        |     gulp.src([`${path.styles.src}**/*.sass`])
+        |     .pipe(sass())
+        |     .pipe(gulp.dest(path.styles.dest))
+        |     .pipe($.browserSync.stream())
+        |   }
+        | }
+
+.container
+  .content
+    h2.title Example with options
+    p Only load a specific set of files
+
+
+.tile
+  .container
+    pre
+      code.language-js
+        | import loader from 'modula-loader';
+
+        | let modules = loader('tasks', {
+        |   opts: {
+        |     include: ['compile:js', 'compile:sass']
+        |   }
+        | })

@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    // build:css index.all.css
+    link(href="../node_modules/prismjs/themes/prism.css" media="screen"
+      rel="stylesheet" charset="utf-8")
+    link(href="index.css" media="screen" rel="stylesheet" charset="utf-8")
+    // endbuild
+    title modula loader - A module loader for node.
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(href="https://fonts.googleapis.com/css?family=Lato:300,400"
+      rel="stylesheet")
+  body
+    block content
+
+    // build:js bundle.all.js
+    script(src="bundle.js" charset="utf-8")
+    // endbuild

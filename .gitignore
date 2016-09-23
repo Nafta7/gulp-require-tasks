@@ -1,2 +1,6 @@
 node_modules/
 npm-debug.log
+
+docs/bundle.js
+docs/index.css
+docs/index.css.map

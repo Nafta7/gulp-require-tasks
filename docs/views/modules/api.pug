@@ -1,0 +1,46 @@
+.container
+  .content
+    h2.title API
+
+    h3.subtitle loader(dir)
+    p Load modules inside the specified directory.
+
+.tile
+  .container
+    pre
+      code.language-js
+        | let moduls = loader(dir)
+
+
+.container
+  .content
+    h3.subtitle loader(dir[, config])
+    p Additionally modula-loader supports options and arguments via configuration.
+
+.tile
+  .container
+    pre
+      code.language-js
+        |  let moduls = loader(dir, {
+        |    opts: {
+        |      flat: true
+        |    },
+        |    args: {
+        |      arg1: arg1,
+        |      arg2: arg2
+        |      ...
+        |    }
+        |  })
+
+
+.container
+  .content
+    h2.title opts
+    p Available options include:
+    ul.list
+      li flat: attribute used to ignore subdir structure (default false).
+      li include: specify the file(s) to load
+      li exclude: specify the file(s) to not load
+
+    h2.title args
+    p Any desired arguments to be passed to the modules.

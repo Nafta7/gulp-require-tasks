@@ -1,0 +1,36 @@
+.content {
+  padding: 0 1rem;
+}
+
+.tile {
+  background: #f5f2f0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.intro-title {
+  @include respond-to(small) {
+    font-size: 4rem;
+    line-height: 1.5em;
+  }
+}
+
+.intro-subtitle {
+  font-size: 1.5rem;
+}
+
+.title {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+
+  @include respond-to(small) {
+    font-size: 2.5rem;
+  }
+}
+
+.subtitle {
+  margin-bottom: .5rem;
+  @include respond-to(small) {
+    font-size: 1.5rem;
+  }
+}
