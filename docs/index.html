@@ -1,0 +1,66 @@
+<!DOCTYPE html><html><head><link rel="stylesheet" href="index.all.css"><title>modula loader - A module loader for node.</title><meta name="viewport" content="width=device-width,initial-scale=1"><link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet"></head><body><div class="header-tile-wrapper"><div class="container header-tile"><div class="header-tile-logo"><a class="logo" href="http://github.com/nafta7/modula-loader">modula loader</a></div><div class="hamburguer"><input class="toggle-menu" type="checkbox" id="toggle-menu" name="toggle-menu"><label class="toggle-menu-label" for="toggle-menu"><span id="menu-icon">&#9776;</span> Menu</label></div><div class="header-tile-nav"><nav class="nav"><ul class="navbar" id="navbar"><li><a href="#">Home</a></li><li><a href="#install">Install</a></li><li><a href="#usage">Usage</a></li><li><a href="#api">API</a></li><li><a href="#examples">Examples</a></li></ul></nav></div></div></div><div id="intro"><div class="container"><div class="content"><div id="intro"><h1 class="intro-title">modula loader</h1><p class="intro-subtitle">A module loader for node.</p></div></div></div></div><div id="install"><div class="container"><div class="content"><h2 class="title">Installation</h2><p>Install from npm.</p></div></div><div class="tile"><div class="container"><pre><code class="language-bash">npm install modula-loader</code></pre></div></div></div><div id="usage"><div class="container"><div class="content"><h2 class="title">Usage</h2><p>modula loader takes a directory name. Only works up to one level deep.</p></div></div><div class="tile"><div class="container"><pre><code class="language-js">import loader from 'modula-loader';
+let modules = loader('tasks');</code></pre></div></div></div><div id="api"><div class="container"><div class="content"><h2 class="title">API</h2><h3 class="subtitle">loader(dir)</h3><p>Load modules inside the specified directory.</p></div></div><div class="tile"><div class="container"><pre><code class="language-js">let moduls = loader(dir)</code></pre></div></div><div class="container"><div class="content"><h3 class="subtitle">loader(dir[, config])</h3><p>Additionally modula-loader supports options and arguments via configuration.</p></div></div><div class="tile"><div class="container"><pre><code class="language-js"> let moduls = loader(dir, {
+   opts: {
+     flat: true
+   },
+   args: {
+     arg1: arg1,
+     arg2: arg2
+     ...
+   }
+ })</code></pre></div></div><div class="container"><div class="content"><h2 class="title">opts</h2><p>Available options include:</p><ul class="list"><li>flat: attribute used to ignore subdir structure (default false).</li><li>include: specify the file(s) to load</li><li>exclude: specify the file(s) to not load</li></ul><h2 class="title">args</h2><p>Any desired arguments to be passed to the modules.</p></div></div></div><div id="examples"><div class="container"><div class="content"><h2 class="title">Examples</h2><p>Given the following directory structure:</p></div></div><div class="tile"><div class="container"><pre><code class="language-bash">tasks
+&#x251c;&#x2500;&#x2500; build
+&#x2502;    &#x251c;&#x2500;&#x2500; compile:js.js
+&#x2502;    &#x2514;&#x2500;&#x2500; compile:sass.js
+&#x2514;&#x2500;&#x2500; deploy
+&#x251c;&#x2500;&#x2500; minify:css.js
+&#x2514;&#x2500;&#x2500; minify:js.js</code></pre></div></div><div class="container"><div class="content"><p>And the code bellow:</p></div></div><div class="tile"><div class="container"><pre><code class="language-js">import loader from 'modula-loader'
+let modules = loader('tasks')</code></pre></div></div><div class="container"><div class="content"><p>It will return the following to modules:</p></div></div><div class="tile"><div class="container"><pre><code class="language-js">{
+  'compile:js': [Function],
+  'compile:sass': [Function],
+  build: {
+    'compile:js': Function],
+    'compile:sass': [Function]
+  },
+  'minify:css': [Function],
+  'minify:js': [Function],
+  deploy: {
+    'minify:css': [Function],
+    'minify:js': [Function]
+  }
+}</code></pre></div></div><div class="container"><div class="content"><h2 class="title">Example with arguments</h2><p>args: Can be whatever you want to be made available to all of your modules.args are dynamically expanded.</p></div></div><div class="tile"><div class="container"><pre><code class="language-js"> import loader from 'modula-loader';
+ let path = {
+   styles:  {
+     src: 'styles/',
+     dest: 'www/styles/'
+   },
+   scripts: {
+     src: 'scripts/',
+     dest: 'www/scripts/'
+   }
+ }
+ let plugins = {
+   browserSync: browserSync
+ }
+ let modules = loader('tasks', {
+   args: {
+     gulp: gulp,
+     path: path,
+     $: plugins
+   }
+ })</code></pre></div></div><div class="container"><div class="content"><p>With this configuration, your modules will receive each arg as an argument:</p></div></div><div class="tile"><div class="container"><pre><code class="language-js">// tasks/build/compile:sass.js - A simple node module
+import sass from 'gulp-sass'
+import rename from 'gulp-rename'
+module.exports = (gulp, path, $) => {
+  return () => {
+    gulp.src([`${path.styles.src}**/*.sass`])
+    .pipe(sass())
+    .pipe(gulp.dest(path.styles.dest))
+    .pipe($.browserSync.stream())
+  }
+}</code></pre></div></div><div class="container"><div class="content"><h2 class="title">Example with options</h2><p>Only load a specific set of files</p></div></div><div class="tile"><div class="container"><pre><code class="language-js">import loader from 'modula-loader';
+let modules = loader('tasks', {
+  opts: {
+    include: ['compile:js', 'compile:sass']
+  }
+})</code></pre></div></div></div><div id="license"><div class="container"><div class="content"><h2 class="title">License</h2><p>MIT License.</p></div></div></div><div class="footer-wrapper"><footer class="footer container"><div class="content text-center"><a class="logo" href="http://github.com/nafta7/modula-loader">modula loader</a></div></footer></div><a href="#" id="back-top"><span id="arrow-up">^</span></a><script src="bundle.all.js"></script></body></html>
