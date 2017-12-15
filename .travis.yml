@@ -1,4 +1,4 @@
 before_script: npm rebuild node-sass
 language: node_js
 node_js:
-  - "0.12"
+  - "6.0"
