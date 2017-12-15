@@ -6,16 +6,20 @@
   "scripts": {
     "test": "nodeunit test/ --reporter nested",
     "docs:deploy": "npm run docs:build && npm run docs:min && npm run push",
-    "docs:push": "npm run docs:add && git commit -m 'Update website' && git push origin master",
+    "docs:push":
+      "npm run docs:add && git commit -m 'Update website' && git push origin master",
     "docs:add": "git add docs/index.html docs/index.all.css docs/bundle.all.js",
-    "docs:build": "npm run docs:build:css | npm run docs:build:html | npm run docs:build:js",
+    "docs:build":
+      "npm run docs:build:css | npm run docs:build:html | npm run docs:build:js",
     "docs:build:css": "node-sass docs/styles/*.scss --source-map true -o docs/",
     "docs:build:html": "pug docs/views/*.pug --out docs/ -P",
-    "docs:build:js": "browserify -d docs/scripts/app.js -o docs/bundle.js -t [ babelify --presets [ es2015 ] ]",
+    "docs:build:js":
+      "browserify -d docs/scripts/app.js -o docs/bundle.js -t [ babelify --presets [ es2015 ] ]",
     "docs:watch:css": "npm run docs:build:css -- -w",
     "docs:watch:pug": "pug docs/views/*.pug --out docs/ -w",
     "docs:watch": "npm run docs:watch:css | npm run docs:watch:pug",
-    "docs:min": "usemin docs/index.html --dest docs -o docs/index.html --htmlmin true --rmlr true"
+    "docs:min":
+      "usemin docs/index.html --dest docs -o docs/index.html --htmlmin true --rmlr true"
   },
   "repository": {
     "type": "git",
@@ -41,6 +45,6 @@
     "usemin-cli": "^0.1.0"
   },
   "engines": {
-    "node": ">=0.12"
+    "node": ">=6.0"
   }
 }
