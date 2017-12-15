@@ -19,14 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nafta7/modula-loader.git"
+    "url": "https://github.com/Nefla/modula-loader.git"
   },
-  "author": "Nafta <naftasan@gmail.com>",
+  "author": "Nefla <neflasan@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Nafta7/modula-loader/issues"
+    "url": "https://github.com/Nefla/modula-loader/issues"
   },
-  "homepage": "https://github.com/Nafta7/modula-loader",
+  "homepage": "https://github.com/Nefla/modula-loader",
   "dependencies": {
     "walkdir": "0.0.11"
   },

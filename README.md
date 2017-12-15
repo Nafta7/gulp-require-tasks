@@ -170,11 +170,11 @@ MIT
 [modula-loader]: https://www.npmjs.com/package/modula-loader
 
 [mit-badge]: https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square
-[mit]: https://github.com/Nafta7/modula-loader/blob/master/LICENSE
+[mit]: https://github.com/Nefla/modula-loader/blob/master/LICENSE
 
 [npm-pkg-link]: https://www.npmjs.org/package/modula-loader
 
 [npm-ver-link]: https://img.shields.io/npm/v/modula-loader.svg?style=flat-square
 
-[TravisLogo]: http://img.shields.io/travis/Nafta7/modula-loader.svg?style=flat-square
-[Travis]: https://travis-ci.org/Nafta7/modula-loader
+[TravisLogo]: http://img.shields.io/travis/Nefla/modula-loader.svg?style=flat-square
+[Travis]: https://travis-ci.org/Nefla/modula-loader
